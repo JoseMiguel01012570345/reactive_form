@@ -1,13 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-basic-page',
-    standalone: true,
-    imports: [
-        CommonModule,
-    ],
     templateUrl: './basicPage.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BasicPageComponent { }
+export class BasicPageComponent {
+
+    public myForm: any
+
+    constructor( private fb: FormBuilder){
+    
+        this.myForm = this.fb.group({
+            name: [''] ,
+            price: [0] ,
+            inStorage: [0] ,
+        })
+    }
+
+
+ }
