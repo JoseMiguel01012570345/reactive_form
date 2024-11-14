@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup , Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-basic-page',
@@ -13,9 +13,9 @@ export class BasicPageComponent {
     constructor( private fb: FormBuilder){
     
         this.myForm = this.fb.group({
-            name: [''] ,
-            price: [0] ,
-            inStorage: [0] ,
+            name: ['' , [ Validators.required , Validators.minLength(3) ]] ,
+            price: [0 , ] ,
+            inStorage: [0 , [Validators.required , Validators.min(0)]] ,
         })
     }
 
