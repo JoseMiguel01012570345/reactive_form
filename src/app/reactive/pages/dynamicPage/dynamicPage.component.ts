@@ -10,6 +10,8 @@ export class DynamicPageComponent {
 
     
     public myForm: FormGroup
+
+    public newFavorite:FormControl = new FormControl( '' , Validators.required );
     
     constructor(
         private fb: FormBuilder
@@ -57,6 +59,24 @@ export class DynamicPageComponent {
         return null
     }
 
+    onDeleteFavorite(index:number ):void{
+        this.favoriteGames.removeAt(index)   
+    }
+
+    onAddFavorite():void{
+
+        if(this.newFavorite.invalid) return
+        
+        const newGame = this.newFavorite.value
+        this.favoriteGames.push(
+            this.fb.control( newGame , Validators.required )    
+
+        )
+
+        this.newFavorite.reset()
+
+    }
+
     get favoriteGames(){
         return this.myForm.get('favoriteGames') as FormArray
     }
@@ -67,6 +87,7 @@ export class DynamicPageComponent {
             this.myForm.markAllAsTouched()
             return
         }
+        (this.myForm.controls['favoriteGames'] as FormArray) = this.fb.array([])
         this.myForm.reset()
     }
 
