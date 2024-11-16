@@ -11,8 +11,19 @@ export class emailValidator implements AsyncValidator {
         
         const email = control.value
 
-        return of({
-            emailTaken:true
+        return new Observable<ValidationErrors|null>(( suscriber ) =>{
+
+            if( email === 'jmperezperez25@gmail.com' )
+            {
+                suscriber.next( {
+                    emailTaken: true
+                })
+                suscriber.complete()
+            }
+
+            suscriber.next(null)
+            suscriber.complete()
+            
         })
     }
     registerOnValidatorChange?(fn: () => void): void {
